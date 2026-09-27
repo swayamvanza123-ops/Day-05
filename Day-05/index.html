@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stockly - Inventory Management</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="bg-circle circle-one"></div>
+    <div class="bg-circle circle-two"></div>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                📦
+            </div>
+
+            <div>
+                <h2>Stockly</h2>
+                <span>Inventory System</span>
+            </div>
+
+        </div>
+
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
+
+        <nav>
+
+            <button
+                class="nav-btn active"
+                onclick="showPage('dashboardPage', this)">
+
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showPage('productsPage', this)">
+
+                <span class="nav-icon">▣</span>
+                <span>Products</span>
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showPage('categoriesPage', this)">
+
+                <span class="nav-icon">◈</span>
+                <span>Categories</span>
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showPage('vendorsPage', this)">
+
+                <span class="nav-icon">♙</span>
+                <span>Vendors</span>
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="mini-logo">
+                S
+            </div>
+
+            <div>
+                <strong>Inventory Manager</strong>
+                <span>Day 05 Project</span>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboardPage" class="page active">
+
+            <div class="topbar">
+
+                <div>
+
+                    <span class="welcome">
+                        WELCOME BACK 👋
+                    </span>
+
+                    <h1>Inventory Dashboard</h1>
+
+                    <p>
+                        Here's what's happening with your inventory today.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-btn"
+                    onclick="showNewProduct()">
+
+                    <span>+</span>
+                    Add Product
+
+                </button>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+                <!-- Total Products -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon purple">
+                            📦
+                        </div>
+
+                        <span class="growth">
+                            +12%
+                        </span>
+
+                    </div>
+
+                    <p>Total Products</p>
+
+                    <h2 id="totalProducts">
+                        0
+                    </h2>
+
+                    <div class="progress">
+
+                        <div class="progress-bar purple-progress"></div>
+
+                    </div>
+
+                    <span class="small-text">
+                        Products in inventory
+                    </span>
+
+                </div>
+
+
+                <!-- Total Stock -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon blue">
+                            📊
+                        </div>
+
+                        <span class="growth">
+                            +8%
+                        </span>
+
+                    </div>
+
+                    <p>Total Stock</p>
+
+                    <h2 id="totalStock">
+                        0
+                    </h2>
+
+                    <div class="progress">
+
+                        <div class="progress-bar blue-progress"></div>
+
+                    </div>
+
+                    <span class="small-text">
+                        Units available
+                    </span>
+
+                </div>
+
+
+                <!-- Low Stock -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon orange">
+                            ⚠
+                        </div>
+
+                        <span class="warning-text">
+                            Attention
+                        </span>
+
+                    </div>
+
+                    <p>Low Stock</p>
+
+                    <h2 id="lowStock">
+                        0
+                    </h2>
+
+                    <div class="progress">
+
+                        <div class="progress-bar orange-progress"></div>
+
+                    </div>
+
+                    <span class="small-text">
+                        Need restocking
+                    </span>
+
+                </div>
+
+
+                <!-- Inventory Value -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green">
+                            ₹
+                        </div>
+
+                        <span class="growth">
+                            +15%
+                        </span>
+
+                    </div>
+
+                    <p>Inventory Value</p>
+
+                    <h2 id="inventoryValue">
+                        ₹0
+                    </h2>
+
+                    <div class="progress">
+
+                        <div class="progress-bar green-progress"></div>
+
+                    </div>
+
+                    <span class="small-text">
+                        Total stock value
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD BOTTOM -->
+
+            <div class="dashboard-bottom">
+
+
+                <!-- Welcome Card -->
+
+                <div class="welcome-card">
+
+                    <div class="welcome-content">
+
+                        <span class="tag">
+                            INVENTORY CONTROL
+                        </span>
+
+                        <h2>
+                            Manage your inventory effortlessly.
+                        </h2>
+
+                        <p>
+                            Add products, organize categories,
+                            monitor stock and keep your inventory
+                            up to date.
+                        </p>
+
+                        <button
+                            class="white-btn"
+                            onclick="openProductsFromDashboard()">
+
+                            View Products →
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="box-decoration">
+                        📦
+                    </div>
+
+                </div>
+
+
+                <!-- Quick Actions -->
+
+                <div class="quick-card">
+
+                    <h3>Quick Actions</h3>
+
+                    <div class="quick-grid">
+
+                        <button
+                            onclick="showNewProduct()"
+                            class="quick-item">
+
+                            <span class="quick-icon purple-bg">
+                                +
+                            </span>
+
+                            <div>
+                                <strong>Add Product</strong>
+                                <small>Create new item</small>
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            onclick="openCategories()"
+                            class="quick-item">
+
+                            <span class="quick-icon blue-bg">
+                                ◈
+                            </span>
+
+                            <div>
+                                <strong>Categories</strong>
+                                <small>Browse categories</small>
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            onclick="openProductsFromDashboard()"
+                            class="quick-item">
+
+                            <span class="quick-icon green-bg">
+                                ▣
+                            </span>
+
+                            <div>
+                                <strong>Products</strong>
+                                <small>View all products</small>
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            onclick="openVendors()"
+                            class="quick-item">
+
+                            <span class="quick-icon orange-bg">
+                                ♙
+                            </span>
+
+                            <div>
+                                <strong>Vendors</strong>
+                                <small>Manage vendors</small>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <section id="productsPage" class="page">
+
+            <div class="topbar">
+
+                <div>
+
+                    <span class="welcome">
+                        INVENTORY
+                    </span>
+
+                    <h1>Products</h1>
+
+                    <p>
+                        Manage and monitor your products.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-btn"
+                    onclick="showNewProduct()">
+
+                    <span>+</span>
+                    New Product
+
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <div class="search-input">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search products..."
+                        oninput="filterProducts()">
+
+                </div>
+
+
+                <select
+                    id="filterSelect"
+                    onchange="filterProducts()">
+
+                    <option value="all">
+                        All Products
+                    </option>
+
+                    <option value="available">
+                        Available
+                    </option>
+
+                    <option value="low">
+                        Low Stock
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PRODUCT TABLE -->
+
+            <div class="modern-table">
+
+                <div class="table-heading">
+
+                    <div>
+
+                        <h2>Product Inventory</h2>
+
+                        <p>
+                            List of all products in your inventory
+                        </p>
+
+                    </div>
+
+                    <span class="table-label">
+                        LIVE DATA
+                    </span>
+
+                </div>
+
+
+                <div class="table-scroll">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>PRODUCT</th>
+
+                                <th>CATEGORY</th>
+
+                                <th>PRICE</th>
+
+                                <th>STOCK</th>
+
+                                <th>STATUS</th>
+
+                                <th>ACTION</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="productTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CATEGORIES ================= -->
+
+        <section id="categoriesPage" class="page">
+
+            <div class="topbar">
+
+                <div>
+
+                    <span class="welcome">
+                        ORGANIZATION
+                    </span>
+
+                    <h1>Categories</h1>
+
+                    <p>
+                        Browse products by category.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="category-grid">
+
+
+                <!-- ELECTRONICS -->
+
+                <div
+                    class="category-card electronics"
+                    onclick="showCategoryProducts('Electronics')">
+
+                    <div class="category-background">
+                        💻
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="category-icon">
+                            ⚡
+                        </div>
+
+                        <h2>Electronics</h2>
+
+                        <p>
+                            Computers, monitors,
+                            printers and more.
+                        </p>
+
+                        <span class="category-link">
+                            View Products →
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCESSORIES -->
+
+                <div
+                    class="category-card accessories"
+                    onclick="showCategoryProducts('Accessories')">
+
+                    <div class="category-background">
+                        🎧
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="category-icon">
+                            ◈
+                        </div>
+
+                        <h2>Accessories</h2>
+
+                        <p>
+                            Mice, keyboards,
+                            cables and more.
+                        </p>
+
+                        <span class="category-link">
+                            View Products →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORY PRODUCT TABLE -->
+
+            <div
+                id="categoryProducts"
+                class="modern-table category-table"
+                style="display:none;">
+
+                <div class="table-heading">
+
+                    <div>
+
+                        <span class="welcome">
+                            CATEGORY
+                        </span>
+
+                        <h2 id="selectedCategoryTitle">
+                            Products
+                        </h2>
+
+                        <p>
+                            Products available in this category.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="back-btn"
+                        onclick="closeCategoryProducts()">
+
+                        ← Back
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-scroll">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>PRODUCT</th>
+
+                                <th>CATEGORY</th>
+
+                                <th>PRICE</th>
+
+                                <th>STOCK</th>
+
+                                <th>STATUS</th>
+
+                                <th>ACTION</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="categoryProductTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= VENDORS ================= -->
+
+        <section id="vendorsPage" class="page">
+
+            <div class="topbar">
+
+                <div>
+
+                    <span class="welcome">
+                        PARTNERS
+                    </span>
+
+                    <h1>Vendors</h1>
+
+                    <p>
+                        Manage your inventory vendors.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="empty-card">
+
+                <div class="empty-icon">
+                    ♙
+                </div>
+
+                <h2>Vendor Management</h2>
+
+                <p>
+                    Vendor management features will
+                    be added here.
+                </p>
+
+                <button class="add-btn">
+                    + Add Vendor
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NEW PRODUCT ================= -->
+
+        <section id="newProductPage" class="page">
+
+            <div class="topbar">
+
+                <div>
+
+                    <span class="welcome">
+                        INVENTORY
+                    </span>
+
+                    <h1>Add New Product</h1>
+
+                    <p>
+                        Create a new inventory product.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="back-btn"
+                    onclick="showProducts()">
+
+                    ← Products
+
+                </button>
+
+            </div>
+
+
+            <div class="form-card">
+
+                <div class="form-header">
+
+                    <div class="form-icon">
+                        +
+                    </div>
+
+                    <div>
+
+                        <h2>Product Information</h2>
+
+                        <p>
+                            Enter the details of your new product.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    id="productForm"
+                    onsubmit="addProduct(event)">
+
+
+                    <div class="form-grid">
+
+
+                        <!-- PRODUCT NAME -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Product Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="productName"
+                                placeholder="e.g. MacBook Air">
+
+                            <small id="nameError"></small>
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Category
+                            </label>
+
+                            <select id="productCategory">
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="Electronics">
+                                    Electronics
+                                </option>
+
+                                <option value="Accessories">
+                                    Accessories
+                                </option>
+
+                            </select>
+
+                            <small id="categoryError"></small>
+
+                        </div>
+
+
+                        <!-- PRICE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Price
+                            </label>
+
+                            <div class="input-prefix">
+
+                                <span>₹</span>
+
+                                <input
+                                    type="number"
+                                    id="productPrice"
+                                    placeholder="50000"
+                                    min="0"
+                                    step="0.01">
+
+                            </div>
+
+                            <small id="priceError"></small>
+
+                        </div>
+
+
+                        <!-- STOCK -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Stock Quantity
+                            </label>
+
+                            <input
+                                type="number"
+                                id="productStock"
+                                placeholder="20"
+                                min="0">
+
+                            <small id="stockError"></small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUCCESS -->
+
+                    <div
+                        id="successMessage"
+                        class="success-message">
+                    </div>
+
+
+                    <div class="form-footer">
+
+                        <button
+                            type="button"
+                            class="cancel-btn"
+                            onclick="showProducts()">
+
+                            Cancel
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="add-btn">
+
+                            ✓ Add Product
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
